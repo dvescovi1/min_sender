@@ -22,6 +22,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include <stdio.h>
 
 /* USER CODE END Includes */
 
@@ -155,10 +156,25 @@ void StartDefaultTask(void *argument)
 {
   /* USER CODE BEGIN defaultTask */
   (void)argument;
-  /* Infinite loop */
+#define SD_CARD_DETECT_PIN GPIO_PIN_2
+#define SD_CARD_DETECT_PORT GPIOG
+
   for(;;)
   {
-    osDelay(1);
+    /* Toggle the LED */
+    HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_0);
+    if (HAL_GPIO_ReadPin(SD_CARD_DETECT_PORT, SD_CARD_DETECT_PIN) == GPIO_PIN_SET)
+    {
+      /* SD card is detected */
+      printf("SD Card Inserted!\n");
+    }
+    else
+    {
+      /* SD card is not detected */
+      printf("No SD Card!\n");
+    }
+    
+    osDelay(500);
   }
   /* USER CODE END defaultTask */
 }
@@ -215,7 +231,7 @@ void LedTask(void *argument)
   /* Infinite loop */
   for(;;)
   {
-    osDelay(1);
+    osDelay(100);
   }
   /* USER CODE END led */
 }
