@@ -57,7 +57,7 @@ set(THIRD_PARTY_PATH "${CMAKE_CURRENT_SOURCE_DIR}/Middleware/Third_Party")
 #set(FREERTOS_PLUS_FAT_DEV_SUPPORT OFF CACHE BOOL "" FORCE)
 
 
-#add_subdirectory(${THIRD_PARTY_PATH}/FreeRTOS-Plus-FAT)
+#add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/FreeRTOSPlusFatPort)
 
 #target_sources(freertos_plus_fat_port PRIVATE
     # Add user sources here
@@ -100,7 +100,7 @@ target_compile_definitions(${CMAKE_PROJECT_NAME} PRIVATE
 # Add linked libraries
 target_link_libraries(${CMAKE_PROJECT_NAME}
     stm32cubemx
-#    stm32fatfs
+#    freertos_plus_fat_port
 #    freertos_plus_fat
     # Add user defined libraries
 )
